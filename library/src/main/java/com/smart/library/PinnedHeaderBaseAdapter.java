@@ -54,10 +54,10 @@ public abstract class PinnedHeaderBaseAdapter extends BaseAdapter
     }
 
     @Override
-    public int getItemPositionInGroup(int indexInGroup) {
+    public int getItemPositionInGroup(int position) {
         for (int i = mHeaderPositionSparse.size() - 1; i >= 0; i--) {
-            if (indexInGroup >= mHeaderPositionSparse.get(i)) {
-                return indexInGroup - mHeaderPositionSparse.get(i) - 1;
+            if (position >= mHeaderPositionSparse.get(i)) {
+                return position - mHeaderPositionSparse.get(i) - 1;
             }
         }
         return 0;

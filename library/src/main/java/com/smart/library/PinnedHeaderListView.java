@@ -204,10 +204,10 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
         /**
          * get item's position in it's group
          *
-         * @param indexInGroup
+         * @param position
          * @return
          */
-        int getItemPositionInGroup(int indexInGroup);
+        int getItemPositionInGroup(int position);
 
         /**
          * get header view with item's position
