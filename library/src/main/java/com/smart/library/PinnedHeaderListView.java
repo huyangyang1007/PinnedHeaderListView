@@ -22,7 +22,7 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
     private float mHeaderOffset;
     private View mCurrentHeader;
     private int mCurrentHeaderPosition = 0;
-    private PinnedHeaderBaseAdapter mAdapter;
+    private IPinnedHeaderAdapter mAdapter;
     private final boolean isRTL = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
 
     public PinnedHeaderListView(Context context) {
@@ -47,10 +47,10 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
     @Override
     public void setAdapter(ListAdapter adapter) {
         mCurrentHeader = null;
-        if (!(adapter instanceof PinnedHeaderBaseAdapter)) {
-            throw new IllegalArgumentException("Adapter is not implement PinnedHeaderBaseAdapter");
+        if (!(adapter instanceof IPinnedHeaderAdapter)) {
+            throw new IllegalArgumentException("Adapter is not implement IPinnedHeaderAdapter");
         }
-        mAdapter = (PinnedHeaderBaseAdapter) adapter;
+        mAdapter = (IPinnedHeaderAdapter) adapter;
         super.setAdapter(adapter);
     }
 
@@ -77,7 +77,7 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
             mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
         }
 
-        if (mAdapter == null || mAdapter.getCount() == 0 || (firstVisibleItem < getHeaderViewsCount())) {
+        if (mAdapter == null || mAdapter.getItemCount() == 0 || (firstVisibleItem < getHeaderViewsCount())) {
             mCurrentHeader = null;
             mHeaderOffset = 0.0f;
             for (int i = firstVisibleItem; i < firstVisibleItem + visibleItemCount; i++) {
@@ -184,6 +184,8 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
     }
 
     public interface IPinnedHeaderAdapter {
+
+        int getItemCount();
 
         /**
          * judge whether the item is a header with item's position

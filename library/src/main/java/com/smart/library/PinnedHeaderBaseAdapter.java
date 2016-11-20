@@ -23,7 +23,7 @@ public abstract class PinnedHeaderBaseAdapter extends BaseAdapter
     }
 
     @Override
-    public int getCount() {
+    public final int getCount() {
         if (mItemCount > 0) {
             return mItemCount;
         }
@@ -36,6 +36,11 @@ public abstract class PinnedHeaderBaseAdapter extends BaseAdapter
             mItemCount += getGroupSparse().get(i) + 1;
         }
         return mItemCount;
+    }
+
+    @Override
+    public int getItemCount() {
+        return getCount();
     }
 
     @Override
